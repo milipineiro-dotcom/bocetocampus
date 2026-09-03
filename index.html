@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<title>Docentes Brown · Campus</title>
+
+<style>
+:root{
+  --bg:#f5f5f7;
+  --card:rgba(255,255,255,.86);
+  --card-solid:#fff;
+  --text:#1d1d1f;
+  --muted:#6e6e73;
+  --line:rgba(60,60,67,.14);
+  --blue:#0071e3;
+  --blue-dark:#0058b0;
+  --blue-soft:#eaf3ff;
+  --coral:#d95f59;
+  --coral-soft:#fff0ee;
+  --green:#34a853;
+  --green-soft:#ebf8ee;
+  --shadow:0 12px 40px rgba(0,0,0,.07);
+  --radius:22px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.95), transparent 32%),
+    radial-gradient(circle at top right, rgba(220,230,245,.55), transparent 28%),
+    var(--bg);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+button,a{font:inherit}
+button{border:0}
+.container{width:min(1040px,92%);margin:0 auto}
+
+.header{
+  position:sticky;top:0;z-index:100;
+  backdrop-filter:saturate(180%) blur(22px);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);
+  background:rgba(250,250,252,.78);
+  border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top);
+}
+.header-inner{
+  height:70px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-mark{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(180deg,#2f5f8d,#24486a);
+  color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;
+  box-shadow:0 6px 15px rgba(41,79,114,.2);
+}
+.brand-title{font-size:16px;font-weight:750;letter-spacing:-.2px}
+.brand-subtitle{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-top:1px}
+.avatar{
+  width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;background:#111;color:#fff;font-weight:700;font-size:14px;
+}
+
+.hero{
+  margin-top:28px;padding:38px;border-radius:30px;
+  background:
+    linear-gradient(135deg,#173d60 0%,#274f72 58%,#2b587d 100%);
+  color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow);
+}
+.hero:after{
+  content:"";position:absolute;right:-80px;top:-100px;width:270px;height:270px;
+  border:1px solid rgba(255,255,255,.32);border-radius:50%;
+}
+.hero:before{
+  content:"";position:absolute;right:-10px;top:-30px;width:150px;height:150px;
+  border:1px solid rgba(222,108,99,.55);border-radius:50%;
+}
+.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.2px;text-transform:uppercase;color:#f5a7a0}
+.hero h1{font-size:clamp(38px,6vw,64px);line-height:.98;letter-spacing:-2px;margin:13px 0 14px;max-width:720px}
+.hero p{font-size:17px;line-height:1.55;max-width:740px;color:rgba(255,255,255,.86);margin:0}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.pill{
+  padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.13);font-size:12px
+}
+
+.glass{
+  background:var(--card);border:1px solid rgba(255,255,255,.7);
+  box-shadow:var(--shadow);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+}
+.progress-card{margin-top:16px;padding:20px;border-radius:20px}
+.progress-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.progress-label{font-size:14px;font-weight:700}
+.progress-value{font-size:13px;font-weight:800;color:var(--blue)}
+.progress-track{height:9px;border-radius:999px;background:#e9e9ed;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#0a84ff,#34aadc);border-radius:999px;transition:width .35s ease}
+.progress-sub{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:8px}
+
+.toolbar{display:flex;gap:8px;overflow:auto;padding:20px 0 10px}
+.tab{
+  padding:11px 16px;border-radius:999px;background:#fff;color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;
+  border:1px solid var(--line);white-space:nowrap;
+}
+.tab.active{background:#111;color:#fff;border-color:#111}
+
+.section{padding:16px 0 40px}
+.section-head{margin-bottom:14px}
+.section-head h2{font-size:24px;letter-spacing:-.6px;margin:0 0 4px}
+.section-head p{margin:0;color:var(--muted);font-size:13px}
+
+.module{
+  background:var(--card-solid);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:12px;
+  box-shadow:0 4px 18px rgba(0,0,0,.035)
+}
+.module-toggle{
+  width:100%;background:transparent;padding:18px;display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer
+}
+.module-number{
+  width:48px;height:48px;min-width:48px;border-radius:14px;display:grid;place-items:center;
+  background:var(--blue-soft);color:var(--blue);font-size:13px;font-weight:800
+}
+.module-copy{flex:1;min-width:0}
+.module-kicker{font-size:10px;color:var(--coral);font-weight:800;text-transform:uppercase;letter-spacing:.8px}
+.module-title{font-size:17px;font-weight:800;letter-spacing:-.2px;margin:2px 0}
+.module-desc{font-size:12px;color:var(--muted)}
+.module-chevron{font-size:18px;color:#8b8b8f;transition:transform .2s}
+.module.open .module-chevron{transform:rotate(180deg)}
+.module-meta{font-size:11px;color:var(--muted);margin-top:5px}
+.module-content{display:none;border-top:1px solid var(--line)}
+.module.open .module-content{display:block}
+
+.lesson{
+  padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border-bottom:1px solid rgba(60,60,67,.10)
+}
+.lesson:last-child{border-bottom:0}
+.lesson.locked{opacity:.45}
+.lesson-main{display:flex;align-items:center;gap:12px;min-width:0}
+.lesson-icon{
+  width:40px;height:40px;min-width:40px;border-radius:12px;display:grid;place-items:center;
+  background:var(--coral-soft);color:var(--coral);font-weight:800
+}
+.lesson.completed .lesson-icon{background:var(--green-soft);color:var(--green)}
+.lesson-title{font-size:14px;font-weight:750}
+.lesson-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.start-btn{
+  padding:9px 12px;border-radius:999px;background:#111;color:#fff;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap
+}
+.start-btn:disabled{background:#e9e9ed;color:#8a8a90;cursor:not-allowed}
+
+.lesson-screen{display:none;padding:28px 0 70px}
+.back-btn{
+  background:rgba(255,255,255,.82);border:1px solid var(--line);padding:10px 14px;border-radius:999px;
+  color:#111;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:20px
+}
+.class-kicker{color:var(--coral);font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:850}
+.lesson-screen h1{font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacing:-1.5px;margin:7px 0 8px}
+.lesson-screen .subtitle{color:var(--muted);font-size:15px;margin-bottom:22px}
+
+.video{
+  width:100%;aspect-ratio:16/9;border-radius:22px;background:#111;overflow:hidden;
+  display:grid;place-items:center;margin-bottom:18px;
+  box-shadow:0 12px 36px rgba(0,0,0,.12);
+}
+.video-placeholder{text-align:center;color:#fff;padding:24px}
+.play{
+  width:68px;height:68px;border-radius:50%;background:#fff;color:#111;
+  display:grid;place-items:center;margin:0 auto 14px;font-size:23px;padding-left:2px;
+}
+.video-placeholder strong{display:block;font-size:15px}
+.video-placeholder span{display:block;color:#a8a8ad;font-size:12px;margin-top:5px}
+
+.lesson-progress{
+  background:var(--blue-soft);border:1px solid #dbeaff;border-radius:18px;padding:16px;margin-bottom:16px
+}
+.lesson-progress-top{display:flex;justify-content:space-between;margin-bottom:8px}
+.lesson-progress-top strong{font-size:13px}.lesson-part-number{font-size:12px;color:var(--blue);font-weight:800}
+.lesson-progress-track{height:7px;background:#d7e8ff;border-radius:999px;overflow:hidden}
+.lesson-progress-fill{height:100%;width:0;background:var(--blue);transition:width .3s}
+
+.parts{display:flex;flex-direction:column;gap:10px}
+.part{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.part-head{display:flex;align-items:center;gap:12px;padding:16px}
+.part-icon{
+  width:42px;height:42px;min-width:42px;border-radius:12px;background:var(--blue-soft);color:var(--blue);
+  display:grid;place-items:center;font-size:18px
+}
+.part.completed .part-icon{background:var(--green-soft);color:var(--green)}
+.part-copy{flex:1;min-width:0}.part-title{font-size:14px;font-weight:800}.part-desc{font-size:11px;color:var(--muted);margin-top:2px}
+.part-buttons{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.part-btn{
+  padding:9px 11px;border-radius:999px;background:#111;color:#fff;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap
+}
+.part-btn.light{background:var(--blue-soft);color:var(--blue)}
+.part-btn.green{background:var(--green);color:#fff}
+.part-body{display:none;padding:0 16px 16px;border-top:1px solid var(--line)}
+.part.open .part-body{display:block}
+.part-body p{font-size:13px;color:#5f5f64;margin:14px 0 12px}
+.pdf-actions{display:flex;gap:8px;flex-wrap:wrap}
+.pdf-actions a,.pdf-actions button{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:10px 12px;border-radius:10px;text-decoration:none;font-size:11px;font-weight:800;cursor:pointer;border:0
+}
+.pdf-actions a{background:var(--blue);color:#fff}
+.pdf-actions button{background:var(--blue-soft);color:var(--blue)}
+
+.activity{
+  margin-top:16px;background:var(--coral-soft);border:1px solid #f2d1cd;border-radius:18px;padding:18px
+}
+.activity-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--coral);font-weight:850}
+.activity h3{font-size:16px;margin:5px 0 5px}
+.activity p{font-size:13px;color:#666;margin:0}
+
+.complete{
+  width:100%;margin-top:16px;padding:15px;border-radius:14px;background:#e6e6ea;color:#8a8a90;
+  font-size:14px;font-weight:850;cursor:not-allowed
+}
+.complete.ready{background:#111;color:#fff;cursor:pointer}
+.complete.done{background:var(--green);color:#fff;cursor:default}
+
+.library-list{display:flex;flex-direction:column;gap:10px}
+.library-item{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px
+}
+.library-name{font-size:13px;font-weight:750}.library-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.open-file{padding:9px 12px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:11px;font-weight:800;cursor:pointer}
+.empty{
+  background:#fff;border:1px dashed #cfd0d4;border-radius:16px;padding:24px;text-align:center;color:var(--muted)
+}
+.profile-note{
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;font-size:13px;color:#666
+}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.42);display:none;align-items:flex-end;justify-content:center;z-index:500;padding:12px}
+.modal.show{display:flex}
+.modal-card{
+  width:min(560px,100%);background:rgba(255,255,255,.96);border-radius:24px 24px 16px 16px;
+  padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.25);backdrop-filter:blur(20px)
+}
+.modal-card h3{margin:0 0 7px;font-size:18px}.modal-card p{margin:0 0 16px;color:var(--muted);font-size:13px}
+.modal-close{padding:10px 15px;border-radius:999px;background:#111;color:#fff;font-weight:800;cursor:pointer}
+
+footer{text-align:center;color:#8a8a90;font-size:11px;padding:10px 0 28px}
+
+@media (max-width:700px){
+  .container{width:94%}
+  .hero{padding:27px 22px;border-radius:24px}
+  .hero h1{font-size:40px;letter-spacing:-1.4px}
+  .hero p{font-size:15px}
+  .module-toggle{padding:16px}
+  .lesson{padding:14px 15px}
+  .start-btn{padding:8px 10px}
+  .lesson-meta{display:none}
+  .part-head{align-items:flex-start;flex-wrap:wrap}
+  .part-buttons{width:100%;margin-left:54px;justify-content:flex-start}
+  .part-body{padding-left:15px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand">
+      <div class="brand-mark">DB</div>
+      <div>
+        <div class="brand-title">Docentes Brown</div>
+        <div class="brand-subtitle">Campus de formación</div>
+      </div>
+    </div>
+    <div class="avatar">M</div>
+  </div>
+</header>
+
+<main class="container">
+
+  <div id="campusView">
+
+    <section class="hero">
+      <div class="eyebrow">Taller + campus asincrónico</div>
+      <h1>Concursar en Superior</h1>
+      <p>
+        Un recorrido guiado para comprender el concurso, trabajar la propuesta pedagógica,
+        preparar la oposición oral y organizar todos tus materiales.
+      </p>
+      <div class="pills">
+        <span class="pill">6 módulos</span>
+        <span class="pill">PDFs</span>
+        <span class="pill">Videos</span>
+        <span class="pill">Actividades</span>
+        <span class="pill">Acceso 1 año</span>
+      </div>
+    </section>
+
+    <section class="progress-card glass">
+      <div class="progress-top">
+        <span class="progress-label">Progreso del campus</span>
+        <span id="progressPercentage" class="progress-value">0%</span>
+      </div>
+      <div class="progress-track">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+      <div class="progress-sub">
+        <span id="completedCount">0 clases completadas</span>
+        <span id="totalCount">20 clases</span>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <button id="classesTab" class="tab active">📚 Clases</button>
+      <button id="libraryTab" class="tab">📁 Biblioteca</button>
+    </div>
+
+    <section id="classesSection" class="section">
+      <div class="section-head">
+        <h2>Recorrido del taller</h2>
+        <p>Completá una clase para desbloquear la siguiente.</p>
+      </div>
+      <div id="modules"></div>
+    </section>
+
+    <section id="librarySection" class="section" hidden>
+      <div class="section-head">
+        <h2>Biblioteca</h2>
+        <p>Los PDFs que abras o descargues van a aparecer automáticamente acá.</p>
+      </div>
+      <div id="libraryContent"></div>
+    </section>
+
+  </div>
+
+  <section id="lessonScreen" class="lesson-screen">
+    <button id="backBtn" class="back-btn">← Volver al campus</button>
+
+    <div id="lessonModule" class="class-kicker">MÓDULO</div>
+    <h1 id="lessonTitle"></h1>
+    <p id="lessonSubtitle" class="subtitle"></p>
+
+    <div class="video">
+      <div class="video-placeholder">
+        <div class="play">▶</div>
+        <strong>Espacio reservado para el video</strong>
+        <span>Acá se podrá colocar el video real de esta clase.</span>
+      </div>
+    </div>
+
+    <div class="lesson-progress">
+      <div class="lesson-progress-top">
+        <strong>Progreso de esta clase</strong>
+        <span id="lessonProgressNumber" class="lesson-part-number">0 / 0</span>
+      </div>
+      <div class="lesson-progress-track">
+        <div id="lessonProgressFill" class="lesson-progress-fill"></div>
+      </div>
+    </div>
+
+    <div id="lessonParts" class="parts"></div>
+
+    <div class="activity">
+      <div class="activity-label">Actividad de la clase</div>
+      <h3 id="lessonActivityTitle"></h3>
+      <p id="lessonActivity"></p>
+    </div>
+
+    <button id="completeButton" class="complete">
+      🔒 Completá todas las partes para continuar
+    </button>
+  </section>
+
+</main>
+
+<footer>DOCENTES BROWN · CAMPUS DE FORMACIÓN</footer>
+
+<div id="modal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <h3 id="modalTitle">Información</h3>
+    <p id="modalText"></p>
+    <button id="modalClose" class="modal-close">Entendido</button>
+  </div>
+</div>
+
+<script>
+/* ==========================================================
+   DATOS DEL CURSO
+   Los PDFs reales se encuentran dentro de /pdfs/
+========================================================== */
+
+const course = [
+  {
+    number:"00",
+    kicker:"Módulo 0 · Guía de uso",
+    title:"Guía de uso",
+    description:"Ubicar el proceso, organizar el estudio y conocer los documentos de base.",
+    lessons:[
+      {
+        id:1,
+        title:"Cómo usar este taller",
+        meta:"Punto de partida · recorrido general",
+        activityTitle:"Actividad inicial",
+        activity:"Escribí qué parte del proceso de concurso te genera actualmente más dudas.",
+        parts:[
+          {id:"1-1",icon:"🧭",title:"Ubicar el proceso",desc:"Conocé el recorrido completo del concurso.",body:"Vas a ubicar el recorrido general del concurso y la función de los distintos materiales del campus.",type:"view"},
+          {id:"1-2",icon:"📅",title:"Organizar el estudio",desc:"Identificá qué preparar en cada etapa.",body:"La propuesta del taller es llegar al concurso con todo leído, trazado y defendible.",type:"view"},
+          {id:"1-3",icon:"📖",title:"Guía de uso",desc:"Leé cómo recorrer el campus.",body:"En esta primera versión la guía de uso está integrada dentro del campus. Más adelante puede reemplazarse o complementarse con un PDF específico.",type:"view"}
+        ]
+      }
+    ]
+  },
+
+  {
+    number:"01",
+    kicker:"Módulo 1 · Procedimiento",
+    title:"El concurso, paso a paso",
+    description:"Convocatoria, inscripción, antecedentes, Comisión Evaluadora, plazos y orden de mérito.",
+    pdf:"pdfs/procedimiento.pdf",
+    pdfName:"procedimiento.pdf",
+    pdfLabel:"Procedimiento · El concurso, paso a paso",
+    lessons:[
+      {
+        id:2,title:"Antes de inscribirte: qué concurso estás mirando",
+        meta:"Vacante · listados · instancias",
+        activityTitle:"Identificá el recorrido",
+        activity:"Ordená las instancias del concurso y anotá qué se evalúa en cada una.",
+        parts:[
+          {id:"2-1",icon:"📌",title:"Qué concurso estás mirando",desc:"Comprendé el procedimiento.",body:"La RESOC 6179/25 regula pruebas de selección para coberturas provisionales y suplentes en institutos superiores estatales de la Provincia de Buenos Aires.",type:"view"},
+          {id:"2-2",icon:"🔢",title:"Las cuatro instancias",desc:"Reconocé la secuencia de evaluación.",body:"Para módulos y horas cátedra de UC: títulos y antecedentes, propuesta pedagógica, clase pública y entrevista.",type:"view"},
+          {id:"2-3",icon:"📄",title:"PDF · Procedimiento",desc:"Abrí o descargá el documento completo.",body:"Documento real del módulo 1.",type:"pdf",file:"pdfs/procedimiento.pdf",fileName:"procedimiento.pdf",resourceName:"Procedimiento · El concurso, paso a paso"}
+        ]
+      },
+      {
+        id:3,title:"La convocatoria: qué tiene que decirte",
+        meta:"Cronograma · CE · inscripción · UC",
+        activityTitle:"Ficha de convocatoria",
+        activity:"Completá la ficha con la información de una convocatoria real.",
+        parts:[
+          {id:"3-1",icon:"📣",title:"Leer la convocatoria",desc:"Detectá la información relevante.",body:"Identificá institución, UC, carrera, resolución, formato, modalidad, régimen, carga, horario, difusión, inscripción y Comisión Evaluadora.",type:"view"},
+          {id:"3-2",icon:"📝",title:"Ficha Radar de convocatoria",desc:"Usá la plantilla del cuaderno.",body:"Registrá los datos centrales de la convocatoria.",type:"view"},
+          {id:"3-3",icon:"📄",title:"PDF · Procedimiento",desc:"Volvé al documento completo cuando lo necesites.",body:"Documento real del módulo 1.",type:"pdf",file:"pdfs/procedimiento.pdf",fileName:"procedimiento.pdf",resourceName:"Procedimiento · El concurso, paso a paso"}
+        ]
+      },
+      {
+        id:4,title:"Títulos, antecedentes y Listados A y B",
+        meta:"Acceso a oposición · antecedentes específicos",
+        activityTitle:"Revisá tus antecedentes",
+        activity:"Identificá tus antecedentes específicos y verificá su certificación.",
+        parts:[
+          {id:"4-1",icon:"🎓",title:"Títulos y antecedentes",desc:"Comprendé la primera instancia.",body:"Trabajá la primera instancia del concurso y la valoración de antecedentes específicos.",type:"view"},
+          {id:"4-2",icon:"📁",title:"Carpeta de inscripción",desc:"Revisá qué documentación preparar.",body:"Organizá la documentación correspondiente a la inscripción.",type:"view"}
+        ]
+      },
+      {
+        id:5,title:"Del concurso al orden de mérito",
+        meta:"Puntaje · mínimos · plazos",
+        activityTitle:"Autoevaluación",
+        activity:"Ordená las etapas y agregá los puntajes mínimos que recuerdes.",
+        parts:[
+          {id:"5-1",icon:"🏁",title:"Orden de mérito",desc:"Comprendé cómo se llega al listado definitivo.",body:"Reconstruí el recorrido hasta el orden de mérito.",type:"view"},
+          {id:"5-2",icon:"🧠",title:"Autoevaluación del módulo",desc:"Comprobá cuánto recordás.",body:"Ordená inscripción, antecedentes, propuesta, clase pública, entrevista y orden de mérito.",type:"view"}
+        ]
+      }
+    ]
+  },
+
+  {
+    number:"02",
+    kicker:"Módulo 2 · Propuesta escrita",
+    title:"Propuesta pedagógica",
+    description:"Cómo leer la norma, construir coherencia y trabajar con la rúbrica de 40 puntos.",
+    pdf:"pdfs/propuesta_pedagogica.pdf",
+    pdfName:"propuesta_pedagogica.pdf",
+    pdfLabel:"Propuesta pedagógica",
+    lessons:[
+      {
+        id:6,title:"La propuesta no empieza escribiendo",
+        meta:"DC · RAM · contexto · decisiones",
+        activityTitle:"Ficha previa a la escritura",
+        activity:"Completá los datos principales de la UC y de la convocatoria.",
+        parts:[
+          {id:"6-1",icon:"🧩",title:"Leer antes de escribir",desc:"Partí del DC, RAM y contexto.",body:"Antes de redactar conviene identificar qué prescribe el Diseño Curricular, cómo funciona académicamente la UC según el RAM y qué contexto institucional está disponible.",type:"view"},
+          {id:"6-2",icon:"📋",title:"Ficha de lectura del Diseño Curricular",desc:"Completá la ficha correspondiente.",body:"Trabajá finalidades, descriptores, formato, régimen, UC previas, simultáneas y posteriores y líneas transversales.",type:"view"},
+          {id:"6-3",icon:"📄",title:"PDF · Propuesta pedagógica",desc:"Abrí o descargá el documento completo.",body:"Documento real del módulo 2.",type:"pdf",file:"pdfs/propuesta_pedagogica.pdf",fileName:"propuesta_pedagogica.pdf",resourceName:"Propuesta pedagógica"}
+        ]
+      },
+      {
+        id:7,title:"Fundamentación y propósitos",
+        meta:"Fundamentación · propósitos · coherencia",
+        activityTitle:"Auditoría de fundamentación",
+        activity:"Verificá que tus decisiones concretas se desprendan de la fundamentación.",
+        parts:[
+          {id:"7-1",icon:"💡",title:"Construir la fundamentación",desc:"Relacioná fundamentos y decisiones.",body:"Trabajá inserción curricular, marco epistemológico, marco didáctico, contexto, política educativa y coherencia.",type:"view"},
+          {id:"7-2",icon:"🎯",title:"Propósitos",desc:"Revisá tus propósitos de enseñanza.",body:"Los propósitos expresan intenciones formativas del docente; no deben convertirse en una lista de temas.",type:"view"}
+        ]
+      },
+      {
+        id:8,title:"Contenidos, bibliografía y metodología",
+        meta:"Selección · secuenciación · estrategias",
+        activityTitle:"Convertir una actividad en estrategia",
+        activity:"Completá propósito → contenido → consigna → intervención → producto → devolución.",
+        parts:[
+          {id:"8-1",icon:"📚",title:"Contenidos y bibliografía",desc:"Seleccioná y jerarquizá.",body:"Organizá contenidos y bibliografía de forma pertinente y coherente con las unidades de enseñanza.",type:"view"},
+          {id:"8-2",icon:"🧑‍🏫",title:"Metodología",desc:"Hacé visible qué, cómo y para qué enseñás.",body:"Explicá metodologías, actividades, recursos, tiempos, agrupamientos y mediaciones.",type:"view"}
+        ]
+      },
+      {
+        id:9,title:"Recursos, cronograma y evaluación",
+        meta:"Organización semanal · RAM · evaluación",
+        activityTitle:"Control de coherencia",
+        activity:"Comprobá que cronograma y evaluación sean viables y coherentes con el RAM.",
+        parts:[
+          {id:"9-1",icon:"📅",title:"Cronograma",desc:"Organizá el desarrollo semanal.",body:"El cronograma debe expresar la organización temporal del recorrido y ser compatible con el calendario académico.",type:"view"},
+          {id:"9-2",icon:"✅",title:"Evaluación",desc:"Relacioná evaluación y enseñanza.",body:"La evaluación debe guardar coherencia con fundamentos, enseñanza y metodología y ajustarse al RAM.",type:"view"}
+        ]
+      },
+      {
+        id:10,title:"La rúbrica: 40 puntos",
+        meta:"Autoevaluación · mínimos",
+        activityTitle:"Auditoría 40/40",
+        activity:"Asignate puntaje por dimensión e indicá dónde aparece la evidencia.",
+        parts:[
+          {id:"10-1",icon:"📊",title:"Las dimensiones de evaluación",desc:"Conocé qué mira la Comisión Evaluadora.",body:"Trabajá fundamentación, propósitos, contenidos, bibliografía, metodología, recursos, cronograma, evaluación y condiciones formales.",type:"view"},
+          {id:"10-2",icon:"🔍",title:"Auditoría 40/40",desc:"Auditá tu propia propuesta.",body:"Buscá evidencia concreta para cada dimensión.",type:"view"}
+        ]
+      }
+    ]
+  },
+
+  {
+    number:"03",
+    kicker:"Módulo 3 · Oposición oral",
+    title:"Clase pública + entrevista",
+    description:"Las dos instancias orales de oposición.",
+    pdf:"pdfs/clase_publica_entrevista.pdf",
+    pdfName:"clase_publica_entrevista.pdf",
+    pdfLabel:"Clase pública + entrevista",
+    lessons:[
+      {
+        id:11,title:"La clase pública no es dar una clase",
+        meta:"20–30 minutos · 35/50 mínimo",
+        activityTitle:"Tres contenidos, tres mapas",
+        activity:"Elegí un contenido y armá un mapa de planificación.",
+        parts:[
+          {id:"11-1",icon:"🎤",title:"Qué es la clase pública",desc:"Comprendé qué espera la CE.",body:"La clase pública consiste en presentar y justificar los fundamentos, criterios y decisiones pedagógico-didácticas de una planificación.",type:"view"},
+          {id:"11-2",icon:"⏱️",title:"20–30 minutos",desc:"Conocé la organización sugerida.",body:"Trabajá encuadre, propósitos y fundamento, secuencia, mediaciones y recursos, evaluación y cierre.",type:"view"},
+          {id:"11-3",icon:"📄",title:"PDF · Clase pública + entrevista",desc:"Abrí o descargá el documento completo.",body:"Documento real del módulo 3.",type:"pdf",file:"pdfs/clase_publica_entrevista.pdf",fileName:"clase_publica_entrevista.pdf",resourceName:"Clase pública + entrevista"}
+        ]
+      },
+      {
+        id:12,title:"Cómo preparar una defensa",
+        meta:"Encuadre · secuencia · mediaciones",
+        activityTitle:"Ensayo de defensa",
+        activity:"Grabate y revisá si justificás tus decisiones.",
+        parts:[
+          {id:"12-1",icon:"🗣️",title:"Presentar y justificar",desc:"No describas solamente: argumentá.",body:"Conectá decisiones concretas con fundamentos pedagógico-didácticos y con la propuesta escrita.",type:"view"},
+          {id:"12-2",icon:"🎥",title:"Simulación",desc:"Entrená tu exposición.",body:"Grabate y revisá si nombraste el Diseño, justificaste con claridad, respondiste lo preguntado y conectaste con tu propia propuesta.",type:"view"}
+        ]
+      },
+      {
+        id:13,title:"La entrevista: profundizar, no repetir",
+        meta:"Rúbrica · preguntas · simulación",
+        activityTitle:"Mis 6 respuestas de seguridad",
+        activity:"Prepará respuestas para las seis preguntas de entrenamiento.",
+        parts:[
+          {id:"13-1",icon:"💬",title:"Qué evalúa la entrevista",desc:"Conocé sus dimensiones.",body:"Trabajá fundamentación, marcos teóricos, Diseño Curricular, reflexión crítica, bibliografía y argumentación.",type:"view"},
+          {id:"13-2",icon:"❓",title:"Banco de preguntas",desc:"Entrená respuestas argumentadas.",body:"Prepará respuestas sobre decisiones de la propuesta, trayectorias heterogéneas, inserción de la UC, formato, bibliografía y evaluación.",type:"view"}
+        ]
+      }
+    ]
+  },
+
+  {
+    number:"04",
+    kicker:"Módulo 4 · Encuadre académico",
+    title:"El RAM para concursantes",
+    description:"Formatos, modalidades, trayectorias, evaluación, acreditación, programa de UC y PPC.",
+    pdf:"pdfs/regimen_academico.pdf",
+    pdfName:"regimen_academico.pdf",
+    pdfLabel:"RAM para concursantes",
+    lessons:[
+      {
+        id:14,title:"Por qué el RAM aparece dentro de tu concurso",
+        meta:"DC + RAM + propuesta",
+        activityTitle:"Revisá tu proyecto",
+        activity:"Localizá decisiones de enseñanza, evaluación y organización del tiempo.",
+        parts:[
+          {id:"14-1",icon:"📘",title:"RAM y propuesta",desc:"Comprendé la relación entre ambos.",body:"El RAM aporta el encuadre académico dentro del cual debe funcionar la propuesta.",type:"view"},
+          {id:"14-2",icon:"📄",title:"PDF · Régimen Académico",desc:"Abrí o descargá el documento completo.",body:"Documento real del módulo 4.",type:"pdf",file:"pdfs/regimen_academico.pdf",fileName:"regimen_academico.pdf",resourceName:"RAM para concursantes"}
+        ]
+      },
+      {
+        id:15,title:"PP, PPC y formatos de UC",
+        meta:"Modalidades · formatos",
+        activityTitle:"Identificá el formato real",
+        activity:"Verificá formato, modalidad y régimen.",
+        parts:[
+          {id:"15-1",icon:"🔄",title:"PP y PPC",desc:"Reconocé las condiciones correspondientes.",body:"Trabajá las características de Presencialidad Plena y Propuesta Pedagógica Combinada según el ámbito concreto.",type:"view"}
+        ]
+      },
+      {
+        id:16,title:"Evaluación, acreditación y programa de UC",
+        meta:"RAM · RAI · evaluación",
+        activityTitle:"Control RAM en 8 preguntas",
+        activity:"Respondé las ocho preguntas de control.",
+        parts:[
+          {id:"16-1",icon:"📋",title:"Programa de UC",desc:"Conocé su contenido mínimo.",body:"Trabajá fundamentos, propósitos/capacidades, contenidos, estrategias metodológicas, calendarización, evaluaciones, bibliografía y demás elementos según corresponda.",type:"view"},
+          {id:"16-2",icon:"✅",title:"Control RAM",desc:"Completá las ocho preguntas.",body:"Revisá formato, modalidad, asistencia, nota mínima, acreditación, libre, recuperatorios/RAI e instrumentos de evaluación.",type:"view"}
+        ]
+      }
+    ]
+  },
+
+  {
+    number:"05",
+    kicker:"Módulo 5 · Actividades y plantillas",
+    title:"Cuaderno de trabajo",
+    description:"Plantillas, checklists y rúbricas para preparar un concurso de principio a fin.",
+    pdf:"pdfs/cuaderno_de_trabajo.pdf",
+    pdfName:"cuaderno_de_trabajo.pdf",
+    pdfLabel:"Cuaderno de trabajo",
+    lessons:[
+      {
+        id:17,title:"Las fichas de trabajo",
+        meta:"Convocatoria · inscripción · DC · contexto",
+        activityTitle:"Armá tu carpeta personal",
+        activity:"Completá las fichas con información de una convocatoria real.",
+        parts:[
+          {id:"17-1",icon:"📝",title:"Ficha 1 · Radar de convocatoria",desc:"Completá la información de la convocatoria.",body:"Institución, UC, carrera/resolución, formato, modalidad, régimen, carga/horario, difusión, inscripción, CE, documentos y canal oficial.",type:"view"},
+          {id:"17-2",icon:"📁",title:"Ficha 2 · Carpeta de inscripción",desc:"Prepará la documentación.",body:"Formulario 1, domicilio, Formulario 2, Oblea 108 A cuando corresponda, títulos, certificaciones y antecedentes específicos.",type:"view"},
+          {id:"17-3",icon:"📚",title:"Ficha 3 · Diseño Curricular",desc:"Ubicá la UC dentro de la carrera.",body:"Finalidades, descriptores, formato, UC previas, simultáneas, posteriores y líneas transversales pertinentes.",type:"view"},
+          {id:"17-4",icon:"📄",title:"PDF · Cuaderno de trabajo",desc:"Abrí o descargá el documento completo.",body:"Documento real con fichas, rúbricas y checklists.",type:"pdf",file:"pdfs/cuaderno_de_trabajo.pdf",fileName:"cuaderno_de_trabajo.pdf",resourceName:"Cuaderno de trabajo"}
+        ]
+      },
+      {
+        id:18,title:"Matriz, presupuesto y auditoría",
+        meta:"Fichas 5 · 6 · 7",
+        activityTitle:"Auditoría final",
+        activity:"Auditá tu propuesta dimensión por dimensión.",
+        parts:[
+          {id:"18-1",icon:"🧩",title:"Ficha 5 · Matriz de coherencia",desc:"Relacioná todos los componentes.",body:"Unidad/problema → propósito → contenido → estrategia → producción → evaluación.",type:"view"},
+          {id:"18-2",icon:"📄",title:"Ficha 6 · Presupuesto de 15 carillas",desc:"Organizá la extensión de la propuesta.",body:"Controlá las secciones y el máximo de extensión.",type:"view"},
+          {id:"18-3",icon:"🔎",title:"Ficha 7 · Auditoría 40/40",desc:"Evaluá tu propuesta.",body:"Asigná puntaje y buscá evidencia concreta para cada dimensión.",type:"view"}
+        ]
+      },
+      {
+        id:19,title:"Clase pública y entrevista",
+        meta:"Fichas 8 · 9 · 10",
+        activityTitle:"Preparación de la oposición",
+        activity:"Usá las fichas de planificación, rúbrica y entrevista.",
+        parts:[
+          {id:"19-1",icon:"🎤",title:"Ficha 8 · Planificación de clase pública",desc:"Prepará la planificación.",body:"Contenido, fundamento, propósitos, apertura, desarrollo, cierre, intervenciones docentes, recursos y evaluación.",type:"view"},
+          {id:"19-2",icon:"📊",title:"Ficha 9 · Clase pública 50 puntos",desc:"Auditá la instancia oral.",body:"Revisá las dimensiones de la rúbrica y el guion de 20–30 minutos.",type:"view"},
+          {id:"19-3",icon:"💬",title:"Ficha 10 · Entrevista 50 puntos",desc:"Prepará tus respuestas.",body:"Fundamentación, marcos teóricos, Diseño Curricular, reflexión crítica, bibliografía y argumentación.",type:"view"}
+        ]
+      },
+      {
+        id:20,title:"Control RAM y última revisión",
+        meta:"Fichas 11 · 12 · cierre",
+        activityTitle:"Última revisión antes de enviar",
+        activity:"Completá el checklist final.",
+        parts:[
+          {id:"20-1",icon:"✅",title:"Ficha 11 · Control RAM",desc:"Último control académico.",body:"Verificá formato, modalidad, asistencia, acreditación, libre, recuperatorios, RAI e instrumentos.",type:"view"},
+          {id:"20-2",icon:"🏁",title:"Ficha 12 · Última revisión",desc:"Checklist antes de enviar.",body:"Verificá nombre de UC, extensión, formato, cronograma, bibliografía, evaluación y carpeta para clase pública y entrevista.",type:"view"}
+        ]
+      }
+    ]
+  }
+];
+
+/* ==========================================================
+   ESTADO PERSISTENTE
+========================================================== */
+
+const STORAGE = {
+  lessons:"DB_v3_completedLessons",
+  parts:"DB_v3_completedParts",
+  library:"DB_v3_library"
+};
+
+let completedLessons = readArray(STORAGE.lessons);
+let completedParts = readArray(STORAGE.parts);
+let library = readArray(STORAGE.library);
+let currentLessonId = null;
+
+function readArray(key){
+  try{
+    const value = localStorage.getItem(key);
+    const parsed = value ? JSON.parse(value) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  }catch{
+    return [];
+  }
+}
+
+function saveState(){
+  localStorage.setItem(STORAGE.lessons, JSON.stringify(completedLessons));
+  localStorage.setItem(STORAGE.parts, JSON.stringify(completedParts));
+  localStorage.setItem(STORAGE.library, JSON.stringify(library));
+}
+
+function allLessons(){
+  return course.flatMap(module => module.lessons);
+}
+
+function lessonById(id){
+  return allLessons().find(lesson => lesson.id === id) || null;
+}
+
+function moduleByLesson(id){
+  return course.find(module =>
+    module.lessons.some(lesson => lesson.id === id)
+  ) || null;
+}
+
+function partById(partId){
+  const lesson = lessonById(currentLessonId);
+  return lesson ? lesson.parts.find(part => part.id === partId) || null : null;
+}
+
+function lessonCompleted(id){
+  return completedLessons.includes(id);
+}
+
+function partCompleted(id){
+  return completedParts.includes(id);
+}
+
+function lessonUnlocked(id){
+  const lessons = allLessons();
+  const index = lessons.findIndex(lesson => lesson.id === id);
+  if(index <= 0) return true;
+  return lessonCompleted(lessons[index - 1].id);
+}
+
+function allPartsDone(lesson){
+  return lesson.parts.every(part => partCompleted(part.id));
+}
+
+/* ==========================================================
+   CAMPUS
+========================================================== */
+
+function renderCampus(){
+  renderModules();
+  renderLibrary();
+  updateGlobalProgress();
+}
+
+function renderModules(){
+
+  const root = document.getElementById("modules");
+  root.innerHTML = "";
+
+  course.forEach((module, moduleIndex) => {
+
+    const moduleDone = module.lessons.every(lesson => lessonCompleted(lesson.id));
+    const moduleCount = module.lessons.filter(lesson => lessonCompleted(lesson.id)).length;
+
+    const article = document.createElement("article");
+    article.className = "module";
+
+    const header = document.createElement("button");
+    header.type = "button";
+    header.className = "module-toggle";
+
+    header.innerHTML = `
+      <div class="module-number">${module.number}</div>
+
+      <div class="module-copy">
+        <div class="module-kicker">${module.kicker}</div>
+        <div class="module-title">${module.title}</div>
+        <div class="module-desc">${module.description}</div>
+        <div class="module-meta">${moduleCount}/${module.lessons.length} clases completadas</div>
+      </div>
+
+      <div class="module-chevron">⌄</div>
+    `;
+
+    header.addEventListener("click", () => {
+      article.classList.toggle("open");
+    });
+
+    const content = document.createElement("div");
+    content.className = "module-content";
+
+    module.lessons.forEach(lesson => {
+      content.appendChild(createLessonRow(lesson));
+    });
+
+    article.append(header, content);
+    root.appendChild(article);
+
+    if(moduleIndex === 0){
+      article.classList.add("open");
+    }
+  });
+}
+
+function createLessonRow(lesson){
+
+  const unlocked = lessonUnlocked(lesson.id);
+  const done = lessonCompleted(lesson.id);
+
+  const row = document.createElement("div");
+  row.className = `lesson ${done ? "completed" : ""} ${!unlocked ? "locked" : ""}`;
+
+  const main = document.createElement("div");
+  main.className = "lesson-main";
+
+  const icon = document.createElement("div");
+  icon.className = "lesson-icon";
+  icon.textContent = done ? "✓" : unlocked ? "▶" : "🔒";
+
+  const copy = document.createElement("div");
+
+  const title = document.createElement("div");
+  title.className = "lesson-title";
+  title.textContent = `${String(lesson.id).padStart(2,"0")}. ${lesson.title}`;
+
+  const meta = document.createElement("div");
+  meta.className = "lesson-meta";
+  meta.textContent = lesson.meta;
+
+  copy.append(title, meta);
+  main.append(icon, copy);
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "start-btn";
+  button.textContent = done ? "Revisar" : "Comenzar clase";
+  button.disabled = !unlocked;
+
+  button.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if(unlocked) openLesson(lesson.id);
+  });
+
+  row.addEventListener("click", () => {
+    if(unlocked) openLesson(lesson.id);
+    else lockedMessage();
+  });
+
+  row.append(main, button);
+
+  return row;
+}
+
+/* ==========================================================
+   CLASE
+========================================================== */
+
+function openLesson(id){
+
+  if(!lessonUnlocked(id)){
+    lockedMessage();
+    return;
+  }
+
+  const lesson = lessonById(id);
+  if(!lesson) return;
+
+  currentLessonId = id;
+
+  document.getElementById("campusView").style.display = "none";
+  document.getElementById("lessonScreen").style.display = "block";
+
+  const module = moduleByLesson(id);
+
+  document.getElementById("lessonModule").textContent =
+    module ? module.kicker : "CLASE";
+
+  document.getElementById("lessonTitle").textContent = lesson.title;
+  document.getElementById("lessonSubtitle").textContent = lesson.meta;
+  document.getElementById("lessonActivityTitle").textContent = lesson.activityTitle;
+  document.getElementById("lessonActivity").textContent = lesson.activity;
+
+  renderLessonParts();
+  updateLessonProgress();
+  updateCompleteButton();
+
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function closeLesson(){
+  document.getElementById("lessonScreen").style.display = "none";
+  document.getElementById("campusView").style.display = "block";
+  currentLessonId = null;
+  renderCampus();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function renderLessonParts(){
+
+  const lesson = lessonById(currentLessonId);
+  const root = document.getElementById("lessonParts");
+
+  root.innerHTML = "";
+
+  lesson.parts.forEach(part => {
+
+    const done = partCompleted(part.id);
+
+    const card = document.createElement("article");
+    card.className = `part ${done ? "completed" : ""}`;
+    card.id = `part-${part.id}`;
+
+    const head = document.createElement("div");
+    head.className = "part-head";
+
+    const icon = document.createElement("div");
+    icon.className = "part-icon";
+    icon.textContent = done ? "✓" : part.icon;
+
+    const copy = document.createElement("div");
+    copy.className = "part-copy";
+
+    const title = document.createElement("div");
+    title.className = "part-title";
+    title.textContent = part.title;
+
+    const desc = document.createElement("div");
+    desc.className = "part-desc";
+    desc.textContent = part.desc;
+
+    copy.append(title, desc);
+
+    const buttons = document.createElement("div");
+    buttons.className = "part-buttons";
+
+    if(part.type === "pdf"){
+      const open = document.createElement("button");
+      open.type = "button";
+      open.className = "part-btn light";
+      open.textContent = done ? "✓ PDF abierto" : "📖 Abrir PDF";
+      open.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openPDF(part);
+      });
+
+      const download = document.createElement("button");
+      download.type = "button";
+      download.className = "part-btn";
+      download.textContent = "📥 Descargar";
+      download.addEventListener("click", (e) => {
+        e.stopPropagation();
+        downloadPDF(part);
+      });
+
+      buttons.append(open, download);
+
+    }else{
+      const action = document.createElement("button");
+      action.type = "button";
+      action.className = `part-btn ${done ? "green" : ""}`;
+      action.textContent = done ? "✓ Realizado" : "Abrir";
+      action.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openPart(part);
+      });
+
+      buttons.append(action);
+    }
+
+    head.append(icon, copy, buttons);
+
+    const body = document.createElement("div");
+    body.className = "part-body";
+
+    const p = document.createElement("p");
+    p.textContent = part.body;
+    body.appendChild(p);
+
+    if(part.type === "pdf"){
+      const actions = document.createElement("div");
+      actions.className = "pdf-actions";
+
+      const a = document.createElement("a");
+      a.href = part.file;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = "Abrir en una pestaña nueva";
+
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = "📥 Descargar";
+      b.addEventListener("click", (e) => {
+        e.stopPropagation();
+        downloadPDF(part);
+      });
+
+      actions.append(a,b);
+      body.appendChild(actions);
+    }
+
+    card.append(head,body);
+
+    head.addEventListener("click", () => {
+      body.classList.toggle("open");
+      card.classList.toggle("open");
+    });
+
+    root.appendChild(card);
+  });
+}
+
+function openPart(part){
+
+  const card = document.getElementById(`part-${part.id}`);
+  if(card) card.classList.add("open");
+
+  markPartDone(part.id);
+}
+
+function markPartDone(partId){
+
+  if(!completedParts.includes(partId)){
+    completedParts.push(partId);
+    saveState();
+  }
+
+  if(currentLessonId){
+    renderLessonParts();
+    updateLessonProgress();
+    updateCompleteButton();
+    updateGlobalProgress();
+  }
+}
+
+/* ==========================================================
+   PDFS
+========================================================== */
+
+function registerLibrary(part){
+
+  if(!part || !part.file) return;
+
+  const exists = library.some(
+    item => item.path === part.file
+  );
+
+  if(!exists){
+    library.push({
+      path:part.file,
+      name:part.resourceName || part.fileName || part.file,
+      date:new Date().toISOString()
+    });
+
+    saveState();
+  }
+
+  renderLibrary();
+}
+
+function openPDF(part){
+
+  if(!part?.file) return;
+
+  window.open(part.file,"_blank","noopener");
+
+  registerLibrary(part);
+  markPartDone(part.id);
+}
+
+function downloadPDF(part){
+
+  if(!part?.file) return;
+
+  const link = document.createElement("a");
+  link.href = part.file;
+  link.download = part.fileName || "";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  registerLibrary(part);
+  markPartDone(part.id);
+}
+
+/* ==========================================================
+   PROGRESO DE CLASE
+========================================================== */
+
+function updateLessonProgress(){
+
+  const lesson = lessonById(currentLessonId);
+  if(!lesson) return;
+
+  const done = lesson.parts.filter(part => partCompleted(part.id)).length;
+  const total = lesson.parts.length;
+  const pct = total ? Math.round(done / total * 100) : 0;
+
+  document.getElementById("lessonProgressNumber").textContent =
+    `${done} / ${total}`;
+
+  document.getElementById("lessonProgressFill").style.width =
+    `${pct}%`;
+}
+
+function updateCompleteButton(){
+
+  const lesson = lessonById(currentLessonId);
+  const button = document.getElementById("completeButton");
+
+  if(!lesson) return;
+
+  if(lessonCompleted(lesson.id)){
+    button.textContent = "✓ Clase completada";
+    button.className = "complete done";
+    button.disabled = true;
+    return;
+  }
+
+  if(allPartsDone(lesson)){
+    button.textContent = "✓ Completar clase y desbloquear siguiente";
+    button.className = "complete ready";
+    button.disabled = false;
+  }else{
+    const done = lesson.parts.filter(part => partCompleted(part.id)).length;
+    const left = lesson.parts.length - done;
+    button.textContent =
+      `🔒 Completá ${left} parte${left === 1 ? "" : "s"} para continuar`;
+    button.className = "complete";
+    button.disabled = true;
+  }
+}
+
+document.getElementById("completeButton").addEventListener("click", () => {
+
+  const lesson = lessonById(currentLessonId);
+
+  if(!lesson || lessonCompleted(lesson.id)) return;
+
+  if(!allPartsDone(lesson)){
+    showModal(
+      "Todavía falta contenido",
+      "Antes de completar la clase tenés que abrir o realizar todas las partes obligatorias."
+    );
+    return;
+  }
+
+  completedLessons.push(lesson.id);
+  saveState();
+  updateCompleteButton();
+  updateGlobalProgress();
+
+  showModal(
+    "¡Clase completada! 🎉",
+    "La siguiente clase ya quedó desbloqueada."
+  );
+
+  setTimeout(closeLesson, 1000);
+});
+
+/* ==========================================================
+   PROGRESO GENERAL
+========================================================== */
+
+function updateGlobalProgress(){
+
+  const total = allLessons().length;
+  const done = completedLessons.length;
+  const pct = total ? Math.round(done / total * 100) : 0;
+
+  document.getElementById("progressPercentage").textContent = `${pct}%`;
+  document.getElementById("progressFill").style.width = `${pct}%`;
+  document.getElementById("completedCount").textContent =
+    `${done} clases completadas`;
+  document.getElementById("totalCount").textContent =
+    `${total} clases`;
+}
+
+/* ==========================================================
+   BIBLIOTECA
+========================================================== */
+
+function renderLibrary(){
+
+  const root = document.getElementById("libraryContent");
+
+  if(library.length === 0){
+    root.innerHTML = `
+      <div class="empty">
+        <strong>📁 Tu biblioteca está vacía</strong>
+        <p style="margin:8px 0 0">
+          A medida que abras o descargues los PDFs desde las clases,
+          van a aparecer automáticamente acá.
+        </p>
+      </div>
+    `;
+    return;
+  }
+
+  const list = document.createElement("div");
+  list.className = "library-list";
+
+  [...library].reverse().forEach(item => {
+
+    const row = document.createElement("div");
+    row.className = "library-item";
+
+    const left = document.createElement("div");
+
+    const name = document.createElement("div");
+    name.className = "library-name";
+    name.textContent = `📄 ${item.name}`;
+
+    const meta = document.createElement("div");
+    meta.className = "library-meta";
+    meta.textContent = "Agregado desde el recorrido del campus";
+
+    left.append(name,meta);
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "open-file";
+    btn.textContent = "Abrir";
+    btn.addEventListener("click", () =>
+      window.open(item.path,"_blank","noopener")
+    );
+
+    row.append(left,btn);
+    list.appendChild(row);
+  });
+
+  root.innerHTML = "";
+  root.appendChild(list);
+}
+
+/* ==========================================================
+   TABS
+========================================================== */
+
+document.getElementById("classesTab").addEventListener("click", () => {
+
+  document.getElementById("classesTab").classList.add("active");
+  document.getElementById("libraryTab").classList.remove("active");
+
+  document.getElementById("classesSection").hidden = false;
+  document.getElementById("librarySection").hidden = true;
+});
+
+document.getElementById("libraryTab").addEventListener("click", () => {
+
+  document.getElementById("libraryTab").classList.add("active");
+  document.getElementById("classesTab").classList.remove("active");
+
+  document.getElementById("classesSection").hidden = true;
+  document.getElementById("librarySection").hidden = false;
+
+  renderLibrary();
+});
+
+/* ==========================================================
+   MODAL
+========================================================== */
+
+function showModal(title,text){
+
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modalText").textContent = text;
+  document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(){
+  document.getElementById("modal").classList.remove("show");
+}
+
+document.getElementById("modalClose").addEventListener("click",closeModal);
+
+document.getElementById("modal").addEventListener("click",e => {
+  if(e.target.id === "modal") closeModal();
+});
+
+function lockedMessage(){
+  showModal(
+    "Clase bloqueada 🔒",
+    "Primero completá la clase anterior. Cuando termines todas sus partes, esta clase se desbloqueará."
+  );
+}
+
+/* ==========================================================
+   NAVEGACIÓN
+========================================================== */
+
+document.getElementById("backBtn").addEventListener("click",closeLesson);
+
+/* ==========================================================
+   INICIO
+========================================================== */
+
+renderCampus();
+</script>
+
+</body>
+</html>
